@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace QuanLyHocSinh
+{
+    // Định nghĩa lớp Student
+    class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, Name: {Name}, Age: {Age}";
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Tạo danh sách học sinh
+            List<Student> students = new List<Student>()
+            {
+                new Student(){ Id = 1, Name = "An", Age = 16 },
+                new Student(){ Id = 2, Name = "Bình", Age = 18 },
+                new Student(){ Id = 3, Name = "Cường", Age = 14 },
+                new Student(){ Id = 4, Name = "Anh", Age = 17 },
+                new Student(){ Id = 5, Name = "Dũng", Age = 19 }
+            };
+
+            // a. In toàn bộ danh sách
+            Console.WriteLine("a. Danh sách toàn bộ học sinh:");
+            foreach (var s in students)
+                Console.WriteLine(s);
+
+            // b. Học sinh có tuổi từ 15 đến 18
+            Console.WriteLine("\nb. Học sinh có tuổi từ 15 đến 18:");
+            var tuoi1518 = students.Where(s => s.Age >= 15 && s.Age <= 18);
+            foreach (var s in tuoi1518)
+                Console.WriteLine(s);
+
+            // c. Học sinh có tên bắt đầu bằng chữ "A"
+            Console.WriteLine("\nc. Học sinh có tên bắt đầu bằng 'A':");
+            var batDauA = students.Where(s => s.Name.StartsWith("A"));
+            foreach (var s in batDauA)
+                Console.WriteLine(s);
+
+            // d. Tính tổng tuổi
+            Console.WriteLine("\nd. Tổng tuổi của các học sinh:");
+            var tongTuoi = students.Sum(s => s.Age);
+            Console.WriteLine("Tổng tuổi = " + tongTuoi);
+
+            // e. Tìm học sinh có tuổi lớn nhất
+            Console.WriteLine("\ne. Học sinh có tuổi lớn nhất:");
+            var maxTuoi = students.Max(s => s.Age);
+            var hsLonNhat = students.Where(s => s.Age == maxTuoi);
+            foreach (var s in hsLonNhat)
+                Console.WriteLine(s);
+
+            // f. Sắp xếp danh sách theo tuổi tăng dần
+            Console.WriteLine("\nf. Danh sách học sinh sắp xếp theo tuổi tăng dần:");
+            var sapXepTuoi = students.OrderBy(s => s.Age);
+            foreach (var s in sapXepTuoi)
+                Console.WriteLine(s);
+
+            Console.ReadLine();
+        }
+    }
+}
